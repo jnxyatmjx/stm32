@@ -18,8 +18,8 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include <stdio_ext.h>
 #include <stdio.h>
+#include <inttypes.h>
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -102,11 +102,14 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-      snprintf(tx_buff,sizeof (tx_buff),"%s %zu %d\r\n","Stm32 Hello World",HAL_GetTick(),HAL_GetTickFreq());
+      //struct timeval systemTime;
+      //gettimeofday(&systemTime,NULL);
+      //return (int64_t)systemTime.tv_sec * 1000LL + (int64_t)systemTime.tv_usec/1000;
+      snprintf(tx_buff,sizeof (tx_buff),"%s %zu %" PRId64 "\r\n","Stm32 Hello World",HAL_GetTick(),((int64_t)1234123));
       HAL_UART_Transmit_IT(&huart2, tx_buff, sizeof(tx_buff));
 
       HAL_GPIO_TogglePin(LED_1_GPIO_Port,LED_1_Pin);
-      HAL_Delay(10);
+      HAL_Delay(40);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
